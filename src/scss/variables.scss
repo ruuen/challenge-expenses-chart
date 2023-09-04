@@ -1,0 +1,33 @@
+// Font Imports
+@font-face {
+  font-display: swap;
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 400;
+  src: url("../assets/fonts/dm-sans-v14-latin-regular.woff2") format("woff2");
+}
+@font-face {
+  font-display: swap;
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 700;
+  src: url("../assets/fonts/dm-sans-v14-latin-700.woff2") format("woff2");
+}
+
+// Colours
+$clr-white: rgba(255, 255, 255, 1);
+$clr-offwhite: rgba(255, 251, 246, 1);
+$clr-cream: rgba(248, 233, 221, 1);
+$clr-cyan: rgba(118, 181, 188, 1);
+$clr-red: rgba(236, 117, 93, 1);
+$clr-brown: rgba(146, 133, 122, 1);
+$clr-brown-dark: rgba(56, 35, 20, 1);
+
+// Fonts
+$font-family: "DM Sans", sans-serif;
+$font-weight-normal: 400;
+$font-weight-bold: 700;
+
+// Breakpoints
+$breakpoint-tablet: 40rem;
+$breakpoint-desktop: 60rem;
