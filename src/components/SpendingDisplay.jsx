@@ -1,3 +1,4 @@
+import "./SpendingDisplay.scss";
 import BarGraph from "./BarGraph";
 import SpendingStats from "./SpendingStats";
 

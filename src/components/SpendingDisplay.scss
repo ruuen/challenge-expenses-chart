@@ -1,0 +1,11 @@
+@use "../scss/variables" as var;
+
+.spending {
+  background-color: var.$clr-offwhite;
+  border-radius: var.$curved-borders;
+  display: flex;
+  flex-direction: column;
+  padding: 1.5em 1em;
+  margin-top: 1em;
+  color: var.$clr-brown-dark;
+}

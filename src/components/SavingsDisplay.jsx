@@ -1,3 +1,4 @@
+import "./SavingsDisplay.scss";
 import imgLogo from "../assets/images/logo.svg";
 
 function SavingsDisplay() {

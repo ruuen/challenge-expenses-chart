@@ -1,3 +1,5 @@
+import "./BarGraph.scss";
+
 function BarGraph() {
   return (
     <div className="spending__graph-group">

@@ -1,0 +1,29 @@
+@use "../scss/variables" as var;
+.spending {
+  &__statistics {
+    display: flex;
+    justify-content: space-between;
+    border-top: 2px solid var.$clr-cream;
+    padding-top: 1.5em;
+  }
+
+  &__subheading {
+    color: var.$clr-brown;
+    font-size: 0.95rem;
+    font-weight: var.$font-weight-normal;
+  }
+
+  &__value {
+    font-weight: var.$font-weight-bold;
+  }
+
+  &__value--large {
+    font-size: 1.825rem;
+    padding-top: 0.1em;
+  }
+
+  &__stat-group {
+    padding-top: 1.25em;
+    text-align: right;
+  }
+}

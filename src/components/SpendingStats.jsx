@@ -1,7 +1,9 @@
+import "./SpendingStats.scss";
+
 function SpendingStats() {
   return (
     <div className="spending__statistics">
-      <div className="spending__stat-group">
+      <div>
         <h2 className="spending__subheading">Total this month</h2>
         <p className="spending__value spending__value--large">$478.33</p>
       </div>

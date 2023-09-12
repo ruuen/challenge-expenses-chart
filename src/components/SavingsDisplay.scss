@@ -1,0 +1,22 @@
+@use "../scss/variables" as var;
+
+.savings {
+  background-color: var.$clr-red;
+  border-radius: var.$curved-borders;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  padding: 1.5em 1em;
+
+  &__heading {
+    font-size: 0.95rem;
+    font-weight: var.$font-weight-normal;
+    user-select: none;
+  }
+
+  &__balance {
+    font-size: 1.5rem;
+    font-weight: var.$font-weight-bold;
+    padding-top: 0.1em;
+  }
+}

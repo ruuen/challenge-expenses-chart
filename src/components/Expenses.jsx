@@ -1,3 +1,4 @@
+import "./Expenses.scss";
 import SavingsDisplay from "./SavingsDisplay";
 import SpendingDisplay from "./SpendingDisplay";
 
