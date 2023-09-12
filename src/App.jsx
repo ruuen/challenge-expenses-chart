@@ -1,7 +1,12 @@
 import "./App.scss";
+import Expenses from "./components/Expenses";
 
 function App() {
-  return <div></div>;
+  return (
+    <main className="page-container">
+      <Expenses />
+    </main>
+  );
 }
 
 export default App;
