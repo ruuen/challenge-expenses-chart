@@ -60,6 +60,12 @@ function BarGraph({ graphData }) {
     if (containerHeight === 0 || containerWidth === 0) return;
 
     const xAxisLabelHeight = 15;
+    const currentWeekdayName = new Date()
+      .toLocaleDateString("en-US", {
+        weekday: "long",
+      })
+      .substring(0, 3)
+      .toLowerCase();
 
     const dimensions = {
       width: containerWidth,
@@ -97,14 +103,14 @@ function BarGraph({ graphData }) {
       .join("rect")
       .classed("spending__graph-item", true)
       // If datum's day value matches today, add modifier class to handle fill colour change
-      // TODO:  confirm best solution, probably a minimal date library out there which will allow this
-      //        but hopefully there's an easy vanilla solution?
-      // For example purposes, will just check for "thu"
-      .classed("spending__graph-item--today", (d) => d.day === "thu")
+      .classed(
+        "spending__graph-item--today",
+        (d) => d.day === currentWeekdayName
+      )
       .attr("rx", 5)
       .attr("ry", 5)
       // Add tabindex attr to make each bar in graph keyboard-navigable
-      // TODO:  Will have aria-items that announce day & value when these are targeted.
+      // TODO:  Will have aria-items that announce day & value when these are read by SR or navigated through.
       //        I'll add these when I do the other assorted accessibility items
       .attr("tabindex", "0")
       .attr("x", (d) => scaleX(d.day))
@@ -124,6 +130,7 @@ function BarGraph({ graphData }) {
   return (
     <div className="spending__graph-group">
       <h2 className="spending__heading">Spending - last 7 days</h2>
+      {/* TODO: This graph wrapper needs to announce an accessible description to SRs */}
       <div ref={containerRef} className="spending__graph-wrapper">
         <svg ref={svgRef} className="spending__graph">
           <g
