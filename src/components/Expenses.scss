@@ -1,0 +1,7 @@
+// I've built this out as a responsive component with the aim that it adapts to container size
+// I'm assuming that min/current/max width restrictions exist further up the cascade when using this component
+.expenses-wrapper {
+  min-width: 225px;
+  max-width: 500px;
+  width: 90vw;
+}

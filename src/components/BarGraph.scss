@@ -1,5 +1,51 @@
+@use "../scss/variables" as var;
+
 .spending {
+  &__graph-group {
+    margin-bottom: 1.5em;
+  }
+
+  &__heading {
+    font-size: 1.5rem;
+    // TODO:  Will do all the font size clamps at the same time.
+    //        The x axis size clamp only concerns the graph, so that can go in this commit
+    // font-size: clamp(1.25rem, 6vw, 2rem);
+    margin-bottom: 1em;
+  }
+
+  &__graph-wrapper {
+    min-height: 165px;
+    // height: 10vh;
+    // max-height: 175px;
+    width: 100%;
+  }
+
   &__graph {
-    max-width: 100%;
+    width: 100%;
+    display: block;
+  }
+
+  &__graph-item {
+    fill: var.$clr-red;
+    transition: opacity 100ms ease-in;
+
+    &--today {
+      fill: var.$clr-cyan;
+    }
+
+    &:hover {
+      cursor: pointer;
+      opacity: 0.65;
+    }
+
+    &:focus-within {
+      opacity: 0.65;
+    }
+  }
+
+  &__graph-axis {
+    color: var.$clr-brown;
+    font-size: clamp(0.75rem, 3.5vw, 0.95rem);
+    font-family: var.$font-family;
   }
 }
