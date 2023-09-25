@@ -6,36 +6,37 @@ function BarGraph({ graphData }) {
   const containerRef = useRef(null);
   const svgRef = useRef(null);
   const xAxisLabelRef = useRef(null);
+  // TODO:  Add bar hover/focus tooltip
 
   // TODO:  move this from state to prop.
   //        the data will get fetched elsewhere)
   const [data, setData] = useState([
     {
-      day: "mon",
+      day: "Monday",
       amount: 17.45,
     },
     {
-      day: "tue",
+      day: "Tuesday",
       amount: 34.91,
     },
     {
-      day: "wed",
+      day: "Wednesday",
       amount: 52.36,
     },
     {
-      day: "thu",
+      day: "Thursday",
       amount: 31.07,
     },
     {
-      day: "fri",
+      day: "Friday",
       amount: 23.39,
     },
     {
-      day: "sat",
+      day: "Saturday",
       amount: 43.28,
     },
     {
-      day: "sun",
+      day: "Sunday",
       amount: 25.48,
     },
   ]);
@@ -60,12 +61,9 @@ function BarGraph({ graphData }) {
     if (containerHeight === 0 || containerWidth === 0) return;
 
     const xAxisLabelHeight = 15;
-    const currentWeekdayName = new Date()
-      .toLocaleDateString("en-US", {
-        weekday: "long",
-      })
-      .substring(0, 3)
-      .toLowerCase();
+    const currentWeekdayName = new Date().toLocaleDateString("en-US", {
+      weekday: "long",
+    });
 
     const dimensions = {
       width: containerWidth,
@@ -88,7 +86,7 @@ function BarGraph({ graphData }) {
     // Define X & Y scales from data
     const scaleX = d3
       .scaleBand()
-      .domain(data.map((x) => x.day))
+      .domain(data.map((d) => getShortDayName(d.day)))
       .range([0, dimensions.width])
       .padding(0.2);
     const scaleY = d3
@@ -110,10 +108,10 @@ function BarGraph({ graphData }) {
       .attr("rx", 5)
       .attr("ry", 5)
       // Add tabindex attr to make each bar in graph keyboard-navigable
-      // TODO:  Will have aria-items that announce day & value when these are read by SR or navigated through.
-      //        I'll add these when I do the other assorted accessibility items
       .attr("tabindex", "0")
-      .attr("x", (d) => scaleX(d.day))
+      // Add aria-labels to bar items so that day name and dollar values are read out by SR
+      .attr("aria-label", (d) => `${d.day}, $${d.amount}`)
+      .attr("x", (d) => scaleX(getShortDayName(d.day)))
       .attr("y", (d) => scaleY(d.amount))
       .attr("width", scaleX.bandwidth())
       .attr("height", (d) => dimensions.xAxisStartHeight - scaleY(d.amount));
@@ -130,8 +128,11 @@ function BarGraph({ graphData }) {
   return (
     <div className="spending__graph-group">
       <h2 className="spending__heading">Spending - last 7 days</h2>
-      {/* TODO: This graph wrapper needs to announce an accessible description to SRs */}
-      <div ref={containerRef} className="spending__graph-wrapper">
+      <div
+        ref={containerRef}
+        className="spending__graph-wrapper"
+        aria-label="A navigable bar graph of expenses for each weekday from Monday to Sunday"
+      >
         <svg ref={svgRef} className="spending__graph">
           <g
             ref={xAxisLabelRef}
@@ -142,6 +143,10 @@ function BarGraph({ graphData }) {
       </div>
     </div>
   );
+}
+
+function getShortDayName(fullDayName) {
+  return fullDayName.substring(0, 3).toLowerCase();
 }
 
 export default BarGraph;

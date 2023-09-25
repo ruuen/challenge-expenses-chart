@@ -7,10 +7,11 @@ function SpendingStats() {
         <h2 className="spending__subheading">Total this month</h2>
         <p className="spending__value spending__value--large">$478.33</p>
       </div>
-      <div className="spending__stat-group">
-        {/* TODO: Make these into one single value while maintaining formatting and stack. SR reads these weirdly, it should be read as one complete sentence */}
-        <p className="spending__value">+2.4%</p>
-        <p className="spending__subheading">from last month</p>
+      {/* TODO: Make SR read these out as one single sentence if possible */}
+      {/* Tried role of text which seemed to work once but never again. */}
+      <div className="spending__stat-group" role="text">
+        <span className="spending__value">+2.4%</span>
+        <span className="spending__subheading">from last month</span>
       </div>
     </div>
   );

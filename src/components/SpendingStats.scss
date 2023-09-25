@@ -8,12 +8,14 @@
   }
 
   &__subheading {
+    display: block;
     color: var.$clr-brown;
     font-size: 0.95rem;
     font-weight: var.$font-weight-normal;
   }
 
   &__value {
+    display: block;
     font-weight: var.$font-weight-bold;
   }
 
