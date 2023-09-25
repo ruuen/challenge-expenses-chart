@@ -8,38 +8,6 @@ function BarGraph({ graphData }) {
   const xAxisLabelRef = useRef(null);
   // TODO:  Add bar hover/focus tooltip
 
-  // TODO:  move this from state to prop.
-  //        the data will get fetched elsewhere)
-  const [data, setData] = useState([
-    {
-      day: "Monday",
-      amount: 17.45,
-    },
-    {
-      day: "Tuesday",
-      amount: 34.91,
-    },
-    {
-      day: "Wednesday",
-      amount: 52.36,
-    },
-    {
-      day: "Thursday",
-      amount: 31.07,
-    },
-    {
-      day: "Friday",
-      amount: 23.39,
-    },
-    {
-      day: "Saturday",
-      amount: 43.28,
-    },
-    {
-      day: "Sunday",
-      amount: 25.48,
-    },
-  ]);
   const [containerWidth, setContainerWidth] = useState(0);
   const [containerHeight, setContainerHeight] = useState(0);
 
@@ -86,18 +54,18 @@ function BarGraph({ graphData }) {
     // Define X & Y scales from data
     const scaleX = d3
       .scaleBand()
-      .domain(data.map((d) => getShortDayName(d.day)))
+      .domain(graphData.map((d) => getShortDayName(d.day)))
       .range([0, dimensions.width])
       .padding(0.2);
     const scaleY = d3
       .scaleLinear()
-      .domain([0, d3.max(data, (d) => d.amount)])
+      .domain([0, d3.max(graphData, (d) => d.amount)])
       .range([dimensions.xAxisStartHeight, 0]);
 
     // Append data bars to svg
     svg
       .selectAll("rect")
-      .data(data)
+      .data(graphData)
       .join("rect")
       .classed("spending__graph-item", true)
       // If datum's day value matches today, add modifier class to handle fill colour change
@@ -123,7 +91,7 @@ function BarGraph({ graphData }) {
       .attr("stroke-width", 0);
 
     // TODO:  Add cleanup function return to yeet the graph on unmount
-  }, [containerWidth, containerHeight, data]);
+  }, [containerWidth, containerHeight, graphData]);
 
   return (
     <div className="spending__graph-group">

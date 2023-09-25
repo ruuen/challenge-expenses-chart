@@ -2,11 +2,14 @@ import "./SpendingDisplay.scss";
 import BarGraph from "./BarGraph";
 import SpendingStats from "./SpendingStats";
 
-function SpendingDisplay() {
+function SpendingDisplay({ spendingData }) {
   return (
     <div className="spending">
-      <BarGraph />
-      <SpendingStats />
+      <BarGraph graphData={spendingData.thisWeek} />
+      <SpendingStats
+        thisMonth={spendingData.thisMonth}
+        lastMonthPercent={spendingData.lastMonthDelta}
+      />
     </div>
   );
 }
