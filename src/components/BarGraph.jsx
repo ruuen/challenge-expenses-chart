@@ -36,11 +36,8 @@ function BarGraph({ graphData }) {
     const dimensions = {
       width: containerWidth,
       height: containerHeight,
-      // TODO:  Change to yAxis, not xAxis
-      //        Not sure how I went this long without realising the typo. No wonder it was so confusing!
       xAxisStartHeight: containerHeight - xAxisLabelHeight * 2,
       xAxisCenterHeight: containerHeight - xAxisLabelHeight,
-      // TODO: Add Y axis padding to account for tooltip positioning above max-scale data bars
     };
 
     // Select the svg element from ref
