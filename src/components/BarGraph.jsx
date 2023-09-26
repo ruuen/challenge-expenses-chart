@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import * as d3 from "d3";
 import "./BarGraph.scss";
 
@@ -25,7 +25,7 @@ function BarGraph({ graphData }) {
   }, []);
 
   // On mount & when the svg container's height or width changes, render the graph
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (containerHeight === 0 || containerWidth === 0) return;
 
     const xAxisLabelHeight = 15;
@@ -78,6 +78,9 @@ function BarGraph({ graphData }) {
       // Add tabindex attr to make each bar in graph keyboard-navigable
       .attr("tabindex", "0")
       // Add aria-labels to bar items so that day name and dollar values are read out by SR
+      // TODO:  Review aria roles after adding these labels
+      //        Getting message in lighthouse audit: [aria-*] attributes do not match their roles
+      //        Flagged for the bar graph itself as well as the items
       .attr("aria-label", (d) => `${d.day}, $${d.amount}`)
       .attr("x", (d) => scaleX(getShortDayName(d.day)))
       .attr("y", (d) => scaleY(d.amount))
@@ -89,8 +92,6 @@ function BarGraph({ graphData }) {
       .call(d3.axisBottom(scaleX).tickSize(0))
       .select(".domain")
       .attr("stroke-width", 0);
-
-    // TODO:  Add cleanup function return to yeet the graph on unmount
   }, [containerWidth, containerHeight, graphData]);
 
   return (
