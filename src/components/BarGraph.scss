@@ -15,9 +15,9 @@
 
   &__graph-wrapper {
     min-height: 165px;
-    // height: 10vh;
-    // max-height: 175px;
     width: 100%;
+    position: relative;
+    margin-top: 3em;
   }
 
   &__graph {
@@ -47,5 +47,21 @@
     color: var.$clr-brown;
     font-size: clamp(0.75rem, 3.5vw, 0.95rem);
     font-family: var.$font-family;
+  }
+
+  &__graph-tooltip {
+    position: absolute;
+    pointer-events: none;
+    background: var.$clr-brown-dark;
+    color: var.$clr-offwhite;
+    font-family: var.$font-family;
+    font-weight: var.$font-weight-bold;
+    line-height: 1;
+    padding: 0.5em;
+    border-radius: 5px;
+    text-align: center;
+    min-width: fit-content;
+    opacity: 0;
+    transition: opacity 100ms ease-in;
   }
 }

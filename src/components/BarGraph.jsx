@@ -6,7 +6,7 @@ function BarGraph({ graphData }) {
   const containerRef = useRef(null);
   const svgRef = useRef(null);
   const xAxisLabelRef = useRef(null);
-  // TODO:  Add bar hover/focus tooltip
+  const tooltipRef = useRef(null);
 
   const [containerWidth, setContainerWidth] = useState(0);
   const [containerHeight, setContainerHeight] = useState(0);
@@ -50,6 +50,8 @@ function BarGraph({ graphData }) {
 
     // Select xAxis label from ref
     const xAxis = d3.select(xAxisLabelRef.current);
+    // Select tooltip from ref
+    const tooltip = d3.select(tooltipRef.current);
 
     // Define X & Y scales from data
     const scaleX = d3
@@ -85,8 +87,33 @@ function BarGraph({ graphData }) {
       .attr("x", (d) => scaleX(getShortDayName(d.day)))
       .attr("y", (d) => scaleY(d.amount))
       .attr("width", scaleX.bandwidth())
-      .attr("height", (d) => dimensions.xAxisStartHeight - scaleY(d.amount));
+      .attr("height", (d) => dimensions.xAxisStartHeight - scaleY(d.amount))
+      // On bar mouseover, show the tooltip
+      .on("mouseover", function (e, d) {
+        const targetBar = d3.select(this);
 
+        tooltip
+          .text(`$${d.amount}`)
+          .style("opacity", 1)
+          // Place tooltip vertically above trigger bar's height
+          .style("top", `${parseInt(targetBar.attr("y")) - 40}px`);
+
+        // Place tooltip horizontally in center of trigger bar with overlapping edges
+        const tooltipWidth = tooltipRef.current.getBoundingClientRect().width;
+        const barWidth = parseInt(targetBar.attr("width"));
+        const targetBarPosition = parseInt(targetBar.attr("x"));
+        const tooltipPosition = Math.ceil(
+          targetBarPosition - (tooltipWidth - barWidth) / 2
+        );
+
+        tooltip.style("left", `${tooltipPosition}px`);
+      })
+      // On bar mouseout, hide tooltip
+      .on("mouseout", function (e, d) {
+        tooltip.style("opacity", 0);
+      });
+
+    // Append x axis label to graph
     xAxis
       .attr("transform", `translate(0,${dimensions.xAxisCenterHeight})`)
       .call(d3.axisBottom(scaleX).tickSize(0))
@@ -102,6 +129,11 @@ function BarGraph({ graphData }) {
         className="spending__graph-wrapper"
         aria-label="A navigable bar graph of expenses for each weekday from Monday to Sunday"
       >
+        <span
+          ref={tooltipRef}
+          className="spending__graph-tooltip"
+          aria-hidden
+        />
         <svg ref={svgRef} className="spending__graph">
           <g
             ref={xAxisLabelRef}
