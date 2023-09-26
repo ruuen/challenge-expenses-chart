@@ -102,11 +102,12 @@ function BarGraph({ graphData }) {
           .style("top", `${parseInt(targetBar.attr("y")) - 40}px`);
 
         // Place tooltip horizontally in center of trigger bar with overlapping edges
-        const tooltipWidth = tooltipRef.current.clientWidth;
+        const tooltipWidth = tooltipRef.current.getBoundingClientRect().width;
         const barWidth = parseInt(targetBar.attr("width"));
         const targetBarPosition = parseInt(targetBar.attr("x"));
-        const tooltipPosition =
-          targetBarPosition - (tooltipWidth - barWidth) / 2;
+        const tooltipPosition = Math.ceil(
+          targetBarPosition - (tooltipWidth - barWidth) / 2
+        );
 
         tooltip.style("left", `${tooltipPosition}px`);
       })
