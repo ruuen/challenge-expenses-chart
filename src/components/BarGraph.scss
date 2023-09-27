@@ -6,10 +6,7 @@
   }
 
   &__heading {
-    font-size: 1.5rem;
-    // TODO:  Will do all the font size clamps at the same time.
-    //        The x axis size clamp only concerns the graph, so that can go in this commit
-    // font-size: clamp(1.25rem, 6vw, 2rem);
+    font-size: clamp(1.25rem, 6vw, 2rem);
     margin-bottom: 1em;
   }
 
@@ -56,6 +53,7 @@
     color: var.$clr-offwhite;
     font-family: var.$font-family;
     font-weight: var.$font-weight-bold;
+    font-size: 1rem;
     line-height: 1;
     padding: 0.5em;
     border-radius: 5px;

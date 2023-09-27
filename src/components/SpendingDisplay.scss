@@ -1,6 +1,7 @@
 @use "../scss/variables" as var;
 
 .spending {
+  font-size: clamp(1rem, 5vw, 1.75rem);
   background-color: var.$clr-offwhite;
   border-radius: var.$curved-borders;
   display: flex;

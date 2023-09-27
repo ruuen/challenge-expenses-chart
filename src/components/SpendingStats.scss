@@ -10,17 +10,18 @@
   &__subheading {
     display: block;
     color: var.$clr-brown;
-    font-size: 0.95rem;
+    font-size: clamp(0.95rem, 3.4vw, 1.125rem);
     font-weight: var.$font-weight-normal;
   }
 
   &__value {
     display: block;
+    font-size: clamp(0.95rem, 3.4vw, 1.125rem);
     font-weight: var.$font-weight-bold;
   }
 
   &__value--large {
-    font-size: 1.825rem;
+    font-size: clamp(1.825rem, 8.5vw, 3rem);
     padding-top: 0.1em;
   }
 

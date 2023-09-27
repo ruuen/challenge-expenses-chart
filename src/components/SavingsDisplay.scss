@@ -1,21 +1,22 @@
 @use "../scss/variables" as var;
 
 .savings {
+  font-size: clamp(1rem, 5vw, 1.75rem);
   background-color: var.$clr-red;
   border-radius: var.$curved-borders;
   color: white;
   display: flex;
   justify-content: space-between;
-  padding: 1.5em;
+  padding: 1em 1.25em;
 
   &__heading {
-    font-size: 0.95rem;
+    font-size: clamp(0.95rem, 3.4vw, 1.125rem);
     font-weight: var.$font-weight-normal;
     user-select: none;
   }
 
   &__balance {
-    font-size: 1.5rem;
+    font-size: clamp(1.5rem, 5.6vw, 2rem);
     font-weight: var.$font-weight-bold;
     padding-top: 0.1em;
   }
