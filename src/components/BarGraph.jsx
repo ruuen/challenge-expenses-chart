@@ -79,11 +79,10 @@ function BarGraph({ graphData }) {
       .attr("ry", 5)
       // Add tabindex attr to make each bar in graph keyboard-navigable
       .attr("tabindex", "0")
-      // Add aria-labels to bar items so that day name and dollar values are read out by SR
-      // TODO:  Review aria roles after adding these labels
-      //        Getting message in lighthouse audit: [aria-*] attributes do not match their roles
-      //        Flagged for the bar graph itself as well as the items
-      .attr("aria-label", (d) => `${d.day}, $${d.amount}`)
+      // Add aria role, description and label to bar items so that day name & dollar values are read out by SRs
+      .attr("role", "graphics-symbol")
+      .attr("aria-roledescription", (d) => `${d.day} spending`)
+      .attr("aria-label", (d) => `$${d.amount}`)
       .attr("x", (d) => scaleX(getShortDayName(d.day)))
       .attr("y", (d) => scaleY(d.amount))
       .attr("width", scaleX.bandwidth())
@@ -124,17 +123,23 @@ function BarGraph({ graphData }) {
   return (
     <div className="spending__graph-group">
       <h2 className="spending__heading">Spending - last 7 days</h2>
-      <div
-        ref={containerRef}
-        className="spending__graph-wrapper"
-        aria-label="A navigable bar graph of expenses for each weekday from Monday to Sunday"
-      >
+      <div ref={containerRef} className="spending__graph-wrapper">
         <span
           ref={tooltipRef}
           className="spending__graph-tooltip"
           aria-hidden
         />
-        <svg ref={svgRef} className="spending__graph">
+        <svg
+          ref={svgRef}
+          className="spending__graph"
+          aria-labelledby="graph-title"
+          aria-describedby="graph-description"
+        >
+          <title id="graph-title">Spending graph</title>
+          <desc id="graph-description">
+            A navigable bar graph of expenses for each weekday from Monday to
+            Sunday
+          </desc>
           <g
             ref={xAxisLabelRef}
             className="spending__graph-axis"
