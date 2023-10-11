@@ -38,7 +38,7 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [Frontend Mentor](https://your-solution-url.com)
+- Solution URL: [Frontend Mentor](https://www.frontendmentor.io/solutions/expenses-chart-component-with-reactsvgd3js-HXGtUaS17C)
 - Live Site URL: [Netlify](https://rd-challenge-expenses-chart.netlify.app/)
 
 ## My process
